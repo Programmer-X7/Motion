@@ -1,75 +1,75 @@
 "use client";
 
-// import { useState } from "react";
-// import { useParams, useRouter } from "next/navigation";
-// import { useQuery, useMutation } from "convex/react";
-// import { Search, Trash, Undo } from "lucide-react";
-// import { toast } from "sonner";
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useQuery, useMutation } from "convex/react";
+import { Search, Trash, Undo } from "lucide-react";
+import { toast } from "sonner";
 
-// import { api } from "@/convex/_generated/api";
-// import { Id } from "@/convex/_generated/dataModel";
-// import { Spinner } from "@/components/spinner";
-// import { Input } from "@/components/ui/input";
-// import { ConfirmModal } from "@/components/modals/confirm-modal";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { Spinner } from "@/components/spinner";
+import { Input } from "@/components/ui/input";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 export const TrashBox = () => {
-//   const router = useRouter();
-//   const params = useParams();
-//   const documents = useQuery(api.documents.getTrash);
-//   const restore = useMutation(api.documents.restore);
-//   const remove = useMutation(api.documents.remove);
+  const router = useRouter();
+  const params = useParams();
+  const documents = useQuery(api.documents.getTrash);
+  const restore = useMutation(api.documents.restore);
+  const remove = useMutation(api.documents.remove);
 
-//   const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
-//   const filteredDocuments = documents?.filter((document) => {
-//     return document.title.toLowerCase().includes(search.toLowerCase());
-//   });
+  const filteredDocuments = documents?.filter((document) => {
+    return document.title.toLowerCase().includes(search.toLowerCase());
+  });
 
-//   const onClick = (documentId: string) => {
-//     router.push(`/documents/${documentId}`);
-//   };
+  const onClick = (documentId: string) => {
+    router.push(`/documents/${documentId}`);
+  };
 
-//   const onRestore = (
-//     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-//     documentId: Id<"documents">,
-//   ) => {
-//     event.stopPropagation();
-//     const promise = restore({ id: documentId });
+  const onRestore = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    documentId: Id<"documents">,
+  ) => {
+    event.stopPropagation();
+    const promise = restore({ id: documentId });
 
-//     toast.promise(promise, {
-//       loading: "Restoring note...",
-//       success: "Note restored!",
-//       error:" Failed to restore note."
-//     });
-//   };
+    toast.promise(promise, {
+      loading: "Restoring note...",
+      success: "Note restored!",
+      error:" Failed to restore note."
+    });
+  };
 
-//   const onRemove = (
-//     documentId: Id<"documents">,
-//   ) => {
-//     const promise = remove({ id: documentId });
+  const onRemove = (
+    documentId: Id<"documents">,
+  ) => {
+    const promise = remove({ id: documentId });
 
-//     toast.promise(promise, {
-//       loading: "Deleting note...",
-//       success: "Note deleted!",
-//       error:" Failed to delete note."
-//     });
+    toast.promise(promise, {
+      loading: "Deleting note...",
+      success: "Note deleted!",
+      error:" Failed to delete note."
+    });
 
-//     if (params.documentId === documentId) {
-//       router.push("/documents");
-//     }
-//   };
+    if (params.documentId === documentId) {
+      router.push("/documents");
+    }
+  };
 
-//   if (documents === undefined) {
-//     return (
-//       <div className="h-full flex items-center justify-center p-4">
-//         <Spinner size="lg" />
-//       </div>
-//     );
-//   }
+  if (documents === undefined) {
+    return (
+      <div className="h-full flex items-center justify-center p-4">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <div className="text-sm">
-      {/* <div className="flex items-center gap-x-1 p-2">
+      <div className="flex items-center gap-x-1 p-2">
         <Search className="h-4 w-4" />
         <Input
           value={search}
@@ -96,14 +96,14 @@ export const TrashBox = () => {
               <div
                 onClick={(e) => onRestore(e, document._id)}
                 role="button"
-                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+                className="rounded-sm p-2 hover:bg-neutral-200"
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </div>
               <ConfirmModal onConfirm={() => onRemove(document._id)}>
                 <div
                   role="button"
-                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+                  className="rounded-sm p-2 hover:bg-neutral-200"
                 >
                   <Trash className="h-4 w-4 text-muted-foreground" />
                 </div>
@@ -111,7 +111,7 @@ export const TrashBox = () => {
             </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
